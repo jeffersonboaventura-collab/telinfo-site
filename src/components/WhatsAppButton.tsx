@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 
-// Números reais da Telinfo
+// NÃºmeros reais da Telinfo
 const CONTACTS = {
-  br: { number: "5512981279877", label: "Brasil 🇧🇷", display: "+55 12 98127-9877" },
-  us: { number: "16893225055",   label: "USA / CA / UK 🇺🇸", display: "+1 689 322 5055" },
+  br: { number: "5512981279877", label: "Brasil ðŸ‡§ðŸ‡·", display: "+55 12 98127-9877" },
+  us: { number: "16893225055",   label: "USA / CA / UK ðŸ‡ºðŸ‡¸", display: "+1 689 322 5055" },
 };
 
-const MSG = "Olá! Vim pelo site da Telinfo e gostaria de uma avaliação gratuita.";
+const MSG = "OlÃ¡! Vim pelo site da Telinfo e gostaria de uma avaliaÃ§Ã£o gratuita.";
 
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(false);
@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
   return (
     <div className="fixed bottom-6 right-6 z-[200] flex flex-col items-end gap-2">
 
-      {/* Popup de seleção de número */}
+      {/* Popup de seleÃ§Ã£o de nÃºmero */}
       {open && (
         <div
           className="flex flex-col gap-2 p-3 rounded-xl mb-1"
@@ -30,7 +30,7 @@ export default function WhatsAppButton() {
             className="text-center mb-1"
             style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.15em" }}
           >
-            SELECIONE O PAÍS
+            SELECIONE O PAÃS
           </p>
 
           {Object.entries(CONTACTS).map(([key, c]) => (
@@ -61,7 +61,7 @@ export default function WhatsAppButton() {
         </div>
       )}
 
-      {/* Botão principal */}
+      {/* BotÃ£o principal */}
       <button
         onClick={() => setOpen(!open)}
         aria-label="WhatsApp"
@@ -89,3 +89,4 @@ export default function WhatsAppButton() {
     </div>
   );
 }
+

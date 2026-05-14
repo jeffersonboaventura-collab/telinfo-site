@@ -1,24 +1,24 @@
-"use client";
+﻿"use client";
 import { useRef, useEffect, useState } from "react";
 import { AlertOctagon, Lightbulb, TrendingUp } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 const CASES = [
-  { id:"01",color:"#00f5ff",sector:"SETOR FINANCEIRO",title:"Instituição Financeira — Vale do Paraíba, SP",
-    challenge:"Alta incidência de fraudes em transações digitais, com prejuízos mensais de 6 dígitos. Sistema legado sem monitoramento e sem análise comportamental.",
-    solution:"Sistema antifraude ML + pentest black/white box da plataforma bancária digital, incluindo APIs de pagamento e módulos de autenticação.",
-    result:"98% de redução em fraudes",resultSub:"ROI positivo em 60 dias. Zero incidentes críticos nos 12 meses seguintes.",
-    metrics:[{l:"Fraudes",v:"−98%"},{l:"ROI",v:"60d"},{l:"Vulns",v:"47"}],tags:["Antifraude","Pentest","ML","FinTech"]},
-  { id:"02",color:"#7b2fff",sector:"INDÚSTRIA 4.0",title:"Manufatura de Alta Precisão — São José dos Campos, SP",
-    challenge:"Rede OT/IT sem segmentação adequada com CHs de produção expostos. Risco crítico de ransomware e espionagem industrial.",
-    solution:"Segmentação completa OT/IT, NGFW industrial, SOC 24/7 com alertas em tempo real e programa de conscientização para 200+ colaboradores.",
-    result:"Zero incidentes em 18 meses",resultSub:"100% das tentativas de invasão bloqueadas. Conformidade com ISO 27001.",
+  { id:"01",color:"#00f5ff",sector:"SETOR FINANCEIRO",title:"InstituiÃ§Ã£o Financeira â€” Vale do ParaÃ­ba, SP",
+    challenge:"Alta incidÃªncia de fraudes em transaÃ§Ãµes digitais, com prejuÃ­zos mensais de 6 dÃ­gitos. Sistema legado sem monitoramento e sem anÃ¡lise comportamental.",
+    solution:"Sistema antifraude ML + pentest black/white box da plataforma bancÃ¡ria digital, incluindo APIs de pagamento e mÃ³dulos de autenticaÃ§Ã£o.",
+    result:"98% de reduÃ§Ã£o em fraudes",resultSub:"ROI positivo em 60 dias. Zero incidentes crÃ­ticos nos 12 meses seguintes.",
+    metrics:[{l:"Fraudes",v:"âˆ’98%"},{l:"ROI",v:"60d"},{l:"Vulns",v:"47"}],tags:["Antifraude","Pentest","ML","FinTech"]},
+  { id:"02",color:"#7b2fff",sector:"INDÃšSTRIA 4.0",title:"Manufatura de Alta PrecisÃ£o â€” SÃ£o JosÃ© dos Campos, SP",
+    challenge:"Rede OT/IT sem segmentaÃ§Ã£o adequada com CHs de produÃ§Ã£o expostos. Risco crÃ­tico de ransomware e espionagem industrial.",
+    solution:"SegmentaÃ§Ã£o completa OT/IT, NGFW industrial, SOC 24/7 com alertas em tempo real e programa de conscientizaÃ§Ã£o para 200+ colaboradores.",
+    result:"Zero incidentes em 18 meses",resultSub:"100% das tentativas de invasÃ£o bloqueadas. Conformidade com ISO 27001.",
     metrics:[{l:"Incidentes",v:"0"},{l:"Uptime",v:"99.9%"},{l:"Equipe",v:"200+"}],tags:["OT/IT","ICS/SCADA","SOC 24/7","Manufatura"]},
-  { id:"03",color:"#00ff88",sector:"VAREJO & LGPD",title:"Rede de Varejo Regional — 28 Unidades, Sudeste",
-    challenge:"28 unidades sem política de segurança unificada. Dados de clientes sem criptografia adequada, iminência de multa ANPD por não conformidade com a LGPD.",
-    solution:"Auditoria completa nas 28 unidades, SIEM centralizado, política corporativa de segurança e programa completo de conformidade LGPD.",
-    result:"Conformidade LGPD em 60 dias",resultSub:"Visibilidade total de 28 unidades em um único painel. Redução de 85% no MTTR.",
-    metrics:[{l:"Unidades",v:"28"},{l:"Prazo",v:"60d"},{l:"MTTR",v:"−85%"}],tags:["LGPD","SIEM","Auditoria","Varejo"]},
+  { id:"03",color:"#00ff88",sector:"VAREJO & LGPD",title:"Rede de Varejo Regional â€” 28 Unidades, Sudeste",
+    challenge:"28 unidades sem polÃ­tica de seguranÃ§a unificada. Dados de clientes sem criptografia adequada, iminÃªncia de multa ANPD por nÃ£o conformidade com a LGPD.",
+    solution:"Auditoria completa nas 28 unidades, SIEM centralizado, polÃ­tica corporativa de seguranÃ§a e programa completo de conformidade LGPD.",
+    result:"Conformidade LGPD em 60 dias",resultSub:"Visibilidade total de 28 unidades em um Ãºnico painel. ReduÃ§Ã£o de 85% no MTTR.",
+    metrics:[{l:"Unidades",v:"28"},{l:"Prazo",v:"60d"},{l:"MTTR",v:"âˆ’85%"}],tags:["LGPD","SIEM","Auditoria","Varejo"]},
 ];
 
 function useVis(){
@@ -36,7 +36,7 @@ function CaseCard({c,index}:{c:typeof CASES[0];index:number}){
       <div className="p-6 md:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
           <div>
-            <span style={{fontFamily:"var(--font-mono)",fontSize:"0.58rem",color:c.color,letterSpacing:"0.2em",marginBottom:6,display:"block"}}>◈ {c.sector}</span>
+            <span style={{fontFamily:"var(--font-mono)",fontSize:"0.58rem",color:c.color,letterSpacing:"0.2em",marginBottom:6,display:"block"}}>â—ˆ {c.sector}</span>
             <div style={{fontFamily:"var(--font-mono)",fontSize:"2rem",fontWeight:900,color:`${c.color}0e`,lineHeight:1,marginBottom:6}}>{c.id}</div>
             <h3 style={{fontFamily:"var(--font-orbitron)",fontSize:"0.9rem",fontWeight:700,color:"#fff"}}>{c.title}</h3>
           </div>
@@ -78,7 +78,7 @@ export default function CasesSection(){
       <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(ellipse 55% 40% at 50% 100%,rgba(0,255,136,0.04),transparent)"}} />
       <div ref={ref} className="relative max-w-6xl mx-auto px-4 lg:px-8">
         <div className="mb-14" style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(24px)",transition:"all 0.6s"}}>
-          <div className="section-tag">◈ {t.cases.tag}</div>
+          <div className="section-tag">â—ˆ {t.cases.tag}</div>
           <h2 style={{fontFamily:"var(--font-orbitron)",fontWeight:700,fontSize:"clamp(1.6rem,4vw,2.5rem)",color:"#fff"}}>
             {t.cases.title} <span className="gradient-text">{t.cases.titleHighlight}</span>
           </h2>
@@ -89,9 +89,10 @@ export default function CasesSection(){
           {CASES.map((c,i)=><CaseCard key={c.id} c={c} index={i} />)}
         </div>
         <p className="mt-8 text-center" style={{fontFamily:"var(--font-mono)",fontSize:"0.6rem",color:"rgba(255,255,255,0.2)",opacity:vis?1:0,transition:"opacity 0.6s 0.5s"}}>
-          * Nomes omitidos por NDAs assinados. Referências disponíveis mediante solicitação.
+          * Nomes omitidos por NDAs assinados. ReferÃªncias disponÃ­veis mediante solicitaÃ§Ã£o.
         </p>
       </div>
     </section>
   );
 }
+

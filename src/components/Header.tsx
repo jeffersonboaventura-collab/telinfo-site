@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 import { useRef, useState, useEffect, RefObject } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useI18n, Locale } from "@/lib/i18n";
 import { FiberHandle, useFiberNav } from "./FiberOpticTransition";
 import AnimatedLogo from "./AnimatedLogo";
 
-const FLAGS: Record<Locale, string> = { pt: "🇧🇷", en: "🇺🇸", es: "🇪🇸" };
+const FLAGS: Record<Locale, string> = { pt: "ðŸ‡§ðŸ‡·", en: "ðŸ‡ºðŸ‡¸", es: "ðŸ‡ªðŸ‡¸" };
 const LOCALES: Locale[] = ["pt", "en", "es"];
 
 interface HeaderProps { fiberRef: RefObject<FiberHandle | null> }
@@ -61,17 +61,17 @@ export default function Header({ fiberRef }: HeaderProps) {
       >
         <div className="max-w-6xl mx-auto px-4 lg:px-8 flex items-center justify-between h-[64px]">
 
-          {/* ── LOGO ANIMADA ──────────────────────────── */}
+          {/* â”€â”€ LOGO ANIMADA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <button
             onClick={() => navigate("#hero")}
             className="focus:outline-none relative flex items-center gap-2 group"
-            aria-label="Ir para o início"
+            aria-label="Ir para o inÃ­cio"
           >
             <div className="relative">
               {/* Logo real com antenas animadas */}
               <AnimatedLogo height={42} />
 
-              {/* Ponto de status "sistema ativo" — posicionado sobre a logo */}
+              {/* Ponto de status "sistema ativo" â€” posicionado sobre a logo */}
               <span
                 className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 z-10"
                 style={{ animation: "pulse-neon 2s infinite", boxShadow: "0 0 6px rgba(0,255,136,0.8)" }}
@@ -79,7 +79,7 @@ export default function Header({ fiberRef }: HeaderProps) {
               />
             </div>
 
-            {/* Subtítulo — visível apenas em desktop */}
+            {/* SubtÃ­tulo â€” visÃ­vel apenas em desktop */}
             <div className="hidden md:flex flex-col leading-none">
               <span
                 style={{
@@ -101,12 +101,12 @@ export default function Header({ fiberRef }: HeaderProps) {
                   marginTop: 2,
                 }}
               >
-                EST. 2012 · SJC/SP
+                EST. 2012 Â· SJC/SP
               </span>
             </div>
           </button>
 
-          {/* ── NAV DESKTOP ───────────────────────────── */}
+          {/* â”€â”€ NAV DESKTOP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <nav className="hidden lg:flex items-center gap-0.5">
             {NAV.map((item) => (
               <button
@@ -120,7 +120,7 @@ export default function Header({ fiberRef }: HeaderProps) {
             ))}
           </nav>
 
-          {/* ── CONTROLES DIREITA ─────────────────────── */}
+          {/* â”€â”€ CONTROLES DIREITA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <div className="flex items-center gap-2">
 
             {/* Seletor de idioma */}
@@ -183,7 +183,7 @@ export default function Header({ fiberRef }: HeaderProps) {
         </div>
       </header>
 
-      {/* ── MENU MOBILE ───────────────────────────────── */}
+      {/* â”€â”€ MENU MOBILE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       {mobileOpen && (
         <>
           <div
@@ -260,3 +260,4 @@ export default function Header({ fiberRef }: HeaderProps) {
     </>
   );
 }
+

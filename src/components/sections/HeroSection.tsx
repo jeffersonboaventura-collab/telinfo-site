@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef, useState, RefObject } from "react";
 import { Lock, Terminal, ChevronDown, AlertTriangle, Shield, Activity, Globe, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
@@ -154,3 +154,4 @@ export default function HeroSection({ fiberRef }: HeroProps) {
     </section>
   );
 }
+

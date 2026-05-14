@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useRef } from "react";
 import FiberOpticTransition, { FiberHandle } from "@/components/FiberOpticTransition";
 import Header          from "@/components/Header";
@@ -28,3 +28,4 @@ export default function HomePage() {
     </>
   );
 }
+

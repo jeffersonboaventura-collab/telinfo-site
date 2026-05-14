@@ -1,17 +1,17 @@
-"use client";
+﻿"use client";
 
 /**
  * AnimatedLogo.tsx
  * =================
  * A logo real da Telinfo com as antenas "ganhando vida":
  *
- * ① Arcos de sinal WiFi pulsando a partir do topo de cada antena
- * ② Pontos de dados subindo pelas hastes (pulso de transmissão)
- * ③ Partículas neon flutuando para cima (dados em trânsito)
- * ④ Linhas verticais das antenas com brilho pulsante
- * ⑤ Ponto verde "TRANSMISSÃO ATIVA" piscando no topo da antena central
+ * â‘  Arcos de sinal WiFi pulsando a partir do topo de cada antena
+ * â‘¡ Pontos de dados subindo pelas hastes (pulso de transmissÃ£o)
+ * â‘¢ PartÃ­culas neon flutuando para cima (dados em trÃ¢nsito)
+ * â‘£ Linhas verticais das antenas com brilho pulsante
+ * â‘¤ Ponto verde "TRANSMISSÃƒO ATIVA" piscando no topo da antena central
  *
- * mixBlendMode: "screen" — torna o fundo preto da logo transparente,
+ * mixBlendMode: "screen" â€” torna o fundo preto da logo transparente,
  * integrando perfeitamente com o header escuro do site.
  */
 
@@ -22,9 +22,9 @@ export interface AnimatedLogoProps {
   className?: string;
 }
 
-// ─── Posições das antenas (% da largura/altura da logo exibida) ───
-// Ajustado para o gráfico real da logo Telinfo:
-// há 3 torres verticais neon no lado esquerdo (~30% da imagem)
+// â”€â”€â”€ PosiÃ§Ãµes das antenas (% da largura/altura da logo exibida) â”€â”€â”€
+// Ajustado para o grÃ¡fico real da logo Telinfo:
+// hÃ¡ 3 torres verticais neon no lado esquerdo (~30% da imagem)
 const ANTENNAS = [
   { xPct: 0.070, yTopPct: 0.28, yBasePct: 0.88 }, // antena esquerda
   { xPct: 0.150, yTopPct: 0.04, yBasePct: 0.93 }, // antena central (mais alta)
@@ -56,14 +56,14 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
     canvas.height = H;
     const ctx = canvas.getContext("2d")!;
 
-    // Converte % → pixels
+    // Converte % â†’ pixels
     const ants = ANTENNAS.map(a => ({
       x:     W * a.xPct,
       yTop:  H * a.yTopPct,
       yBase: H * a.yBasePct,
     }));
 
-    // ── Partículas (bits de dados subindo) ───────────────
+    // â”€â”€ PartÃ­culas (bits de dados subindo) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const particles = Array.from({ length: 32 }, (_, i) => {
       const ai  = i % 3;
       const ant = ants[ai];
@@ -79,12 +79,12 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
       };
     });
 
-    // ── Anéis de sinal (ondas de rádio) ──────────────────
+    // â”€â”€ AnÃ©is de sinal (ondas de rÃ¡dio) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     interface Ring { x: number; y: number; r: number; a: number }
     const rings: Ring[] = [];
     let ringTick = 0;
 
-    // ── Feixes de pulso (ponto viajando pela haste) ───────
+    // â”€â”€ Feixes de pulso (ponto viajando pela haste) â”€â”€â”€â”€â”€â”€â”€
     const beams = ants.map((ant, i) => ({
       x:     ant.x,
       y:     ant.yBase - (ant.yBase - ant.yTop) * Math.random(),
@@ -94,7 +94,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
       a:     0.8,
     }));
 
-    // ── LOOP DE ANIMAÇÃO ──────────────────────────────────
+    // â”€â”€ LOOP DE ANIMAÃ‡ÃƒO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const draw = () => {
       const f = ++frameRef.current;
       ctx.clearRect(0, 0, W, H);
@@ -103,7 +103,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
       ctx.rect(0, 0, W, H);
       ctx.clip(); // evita desenhar fora do canvas
 
-      // ① LINHAS DAS ANTENAS com brilho pulsante ──────────
+      // â‘  LINHAS DAS ANTENAS com brilho pulsante â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       ants.forEach((ant, i) => {
         const pulse = 0.14 + Math.sin(f * 0.045 + i * 1.4) * 0.08;
         const grad  = ctx.createLinearGradient(ant.x, ant.yBase, ant.x, ant.yTop);
@@ -123,7 +123,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         ctx.restore();
       });
 
-      // ② ARCOS TIPO WIFI (ondas de sinal por antena) ──────
+      // â‘¡ ARCOS TIPO WIFI (ondas de sinal por antena) â”€â”€â”€â”€â”€â”€
       ants.forEach((ant, ai) => {
         const BARS = 3;
         for (let b = 0; b < BARS; b++) {
@@ -134,7 +134,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
 
           ctx.save();
           ctx.beginPath();
-          // Semicírculo para CIMA a partir do topo da antena
+          // SemicÃ­rculo para CIMA a partir do topo da antena
           ctx.arc(ant.x, ant.yTop, r, Math.PI, 0, true);
           ctx.strokeStyle = `rgba(${C_CYAN},${alpha})`;
           ctx.lineWidth   = b === 0 ? 1.1 : 0.75;
@@ -147,7 +147,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         }
       });
 
-      // ③ ANÉIS PROPAGANTES (broadcast) ───────────────────
+      // â‘¢ ANÃ‰IS PROPAGANTES (broadcast) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       rings.forEach(ring => {
         ring.r += 0.72;
         ring.a -= 0.014;
@@ -173,7 +173,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         rings.push({ x: ant.x, y: ant.yTop, r: 1, a: 0.6 });
       }
 
-      // ④ FEIXES DE PULSO (ponto subindo pela haste) ───────
+      // â‘£ FEIXES DE PULSO (ponto subindo pela haste) â”€â”€â”€â”€â”€â”€â”€
       beams.forEach(beam => {
         beam.y -= beam.spd;
         if (beam.y < beam.yTop) {
@@ -201,7 +201,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         ctx.restore();
       });
 
-      // ⑤ PARTÍCULAS (dados em trânsito) ───────────────────
+      // â‘¤ PARTÃCULAS (dados em trÃ¢nsito) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
@@ -225,7 +225,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         ctx.restore();
       });
 
-      // ⑥ INDICADOR "TRANSMISSÃO ATIVA" (pisco verde no topo) ──
+      // â‘¥ INDICADOR "TRANSMISSÃƒO ATIVA" (pisco verde no topo) â”€â”€
       const tall  = ants[1]; // antena central = mais alta
       const blink = (f % 38) < 22; // pisca a cada ~38 frames
       if (blink) {
@@ -238,7 +238,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         ctx.shadowBlur = 12;
         ctx.shadowColor= `rgba(${C_GREEN},0.7)`;
         ctx.fill();
-        // Núcleo
+        // NÃºcleo
         ctx.beginPath();
         ctx.arc(tall.x, tall.yTop - 2, 2, 0, Math.PI * 2);
         ctx.fillStyle  = `rgba(${C_GREEN},${ba})`;
@@ -288,7 +288,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
       style={{ lineHeight: 0 }}
     >
       {/*
-        mixBlendMode: "screen" — faz o fundo PRETO da logo virar transparente.
+        mixBlendMode: "screen" â€” faz o fundo PRETO da logo virar transparente.
         No fundo escuro do site (#020408), o preto desaparece e os
         elementos neon cyan/branco da logo brilham naturalmente.
       */}
@@ -306,7 +306,7 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
         }}
       />
 
-      {/* Canvas de animação — mesma blend mode additive */}
+      {/* Canvas de animaÃ§Ã£o â€” mesma blend mode additive */}
       <canvas
         ref={canvasRef}
         aria-hidden="true"
@@ -320,3 +320,4 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
     </div>
   );
 }
+
