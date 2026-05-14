@@ -321,3 +321,4 @@ export default function AnimatedLogo({ height = 40, className = "" }: AnimatedLo
   );
 }
 
+
