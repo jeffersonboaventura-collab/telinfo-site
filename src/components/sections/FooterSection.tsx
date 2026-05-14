@@ -38,7 +38,7 @@ export default function FooterSection() {
   return (
     <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", background: "#020408" }}>
 
-      {/* Top bar â€” contatos rÃ¡pidos */}
+      {/* Top bar — contatos rápidos */}
       <div style={{ borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "24px 0" }}>
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -64,7 +64,7 @@ export default function FooterSection() {
               onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)")}>
               <Phone className="w-4 h-4 flex-shrink-0" style={{ color: "#00ff88" }} />
               <div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>BRASIL ðŸ‡§ðŸ‡·</div>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>BRASIL 🇧🇷</div>
                 <div className="text-white" style={{ fontSize: "0.78rem" }}>+55 12 98127-9877</div>
               </div>
             </a>
@@ -77,7 +77,7 @@ export default function FooterSection() {
               onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)")}>
               <Phone className="w-4 h-4 flex-shrink-0" style={{ color: "#4499ff" }} />
               <div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>USA / CA / UK ðŸ‡ºðŸ‡¸ðŸ‡¨ðŸ‡¦ðŸ‡¬ðŸ‡§</div>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>USA / CA / UK 🇺🇸🇨🇦🇬🇧</div>
                 <div className="text-white" style={{ fontSize: "0.78rem" }}>+1 689 322 5055</div>
               </div>
             </a>
@@ -114,10 +114,10 @@ export default function FooterSection() {
                 TELINFO CYBER SECURITY
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "rgba(255,255,255,0.28)", marginTop: 1 }}>
-                Â© {year} â€” {t.footer.rights} | {t.footer.founded}
+                © {year} — {t.footer.rights} | {t.footer.founded}
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.5rem", color: "rgba(255,255,255,0.18)", marginTop: 1 }}>
-                SeguranÃ§a CibernÃ©tica Â· Desenvolvimento Web Â· Hospedagem Â· Atendemos ðŸ‡§ðŸ‡· ðŸ‡ºðŸ‡¸ ðŸ‡¨ðŸ‡¦ ðŸ‡¬ðŸ‡§
+                Segurança Cibernética · Desenvolvimento Web · Hospedagem · Atendemos 🇧🇷 🇺🇸 🇨🇦 🇬🇧
               </div>
             </div>
           </div>

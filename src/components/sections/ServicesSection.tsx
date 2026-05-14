@@ -5,16 +5,16 @@ import { useI18n } from "@/lib/i18n";
 import { FiberHandle, useFiberNav } from "../FiberOpticTransition";
 
 const SERVICES = [
-  { icon:Search,       title:"Pentest Autorizado",        desc:"Testes de invasÃ£o (black, grey, white box) em redes, apps web/mobile e APIs. RelatÃ³rio executivo + tÃ©cnico com plano de remediaÃ§Ã£o.",                        color:"#00f5ff", tag:"CYBERSEC",  highlight:false },
-  { icon:Eye,          title:"Auditoria Digital",          desc:"AnÃ¡lise da postura de seguranÃ§a: polÃ­ticas, acessos, criptografia e conformidade. Roadmap de remediaÃ§Ã£o priorizado por criticidade.",                          color:"#4499ff", tag:"AUDIT",     highlight:false },
-  { icon:AlertTriangle,title:"Antifraude Digital",         desc:"Sistemas ML para detecÃ§Ã£o e prevenÃ§Ã£o de fraudes digitais com anÃ¡lise comportamental e alertas em tempo real.",                                                color:"#7b2fff", tag:"ANTIFRAUD", highlight:false },
-  { icon:Crosshair,    title:"Rastreabilidade & OSINT",    desc:"Monitoramento de ativos digitais, trilha de auditoria completa, inteligÃªncia de fontes abertas e anÃ¡lise forense digital.",                                    color:"#00ff88", tag:"TRACKING",  highlight:false },
-  { icon:Network,      title:"Conectividade Segura",       desc:"VPN corporativa, SD-WAN, segmentaÃ§Ã£o de rede e infraestrutura de alta disponibilidade com criptografia ponta a ponta.",                                        color:"#ff9900", tag:"CONNECT",   highlight:false },
-  { icon:Camera,       title:"CFTV & SeguranÃ§a FÃ­sica",    desc:"CÃ¢meras IP 4K, reconhecimento facial, controle de acesso inteligente e monitoramento perimetral integrado 24/7.",                                              color:"#ff00aa", tag:"CFTV",      highlight:false },
-  { icon:Cpu,          title:"SeguranÃ§a IoT/OT",           desc:"ProteÃ§Ã£o de dispositivos IoT, redes industriais OT/IT, ICS/SCADA e ambientes crÃ­ticos de manufatura contra ameaÃ§as avanÃ§adas.",                                color:"#00ffff", tag:"IOT",       highlight:false },
-  { icon:BarChart3,    title:"InteligÃªncia TÃ©cnica",       desc:"Threat hunting, CTI, monitoramento da dark web e suporte estratÃ©gico para CISOs e C-level.",                                                                   color:"#ffcc00", tag:"INTEL",     highlight:false },
-  { icon:Code2,        title:"Desenvolvimento de Websites", desc:"Sites institucionais, landing pages e sistemas web modernos com foco em performance, SEO e conversÃ£o. Stack premium: Next.js, React, TypeScript.",             color:"#00ff88", tag:"WEB DEV",   highlight:true },
-  { icon:Server,       title:"Hospedagem & Desempenho",    desc:"Infraestrutura cloud de alta disponibilidade, CDN global, SSL gratuito e monitoramento 24/7. Seu site rÃ¡pido, seguro e sempre no ar em qualquer paÃ­s.",       color:"#4499ff", tag:"HOSTING",   highlight:true },
+  { icon:Search,       title:"Pentest Autorizado",        desc:"Testes de invasão (black, grey, white box) em redes, apps web/mobile e APIs. Relatório executivo + técnico com plano de remediação.",                        color:"#00f5ff", tag:"CYBERSEC",  highlight:false },
+  { icon:Eye,          title:"Auditoria Digital",          desc:"Análise da postura de segurança: políticas, acessos, criptografia e conformidade. Roadmap de remediação priorizado por criticidade.",                          color:"#4499ff", tag:"AUDIT",     highlight:false },
+  { icon:AlertTriangle,title:"Antifraude Digital",         desc:"Sistemas ML para detecção e prevenção de fraudes digitais com análise comportamental e alertas em tempo real.",                                                color:"#7b2fff", tag:"ANTIFRAUD", highlight:false },
+  { icon:Crosshair,    title:"Rastreabilidade & OSINT",    desc:"Monitoramento de ativos digitais, trilha de auditoria completa, inteligência de fontes abertas e análise forense digital.",                                    color:"#00ff88", tag:"TRACKING",  highlight:false },
+  { icon:Network,      title:"Conectividade Segura",       desc:"VPN corporativa, SD-WAN, segmentação de rede e infraestrutura de alta disponibilidade com criptografia ponta a ponta.",                                        color:"#ff9900", tag:"CONNECT",   highlight:false },
+  { icon:Camera,       title:"CFTV & Segurança Física",    desc:"Câmeras IP 4K, reconhecimento facial, controle de acesso inteligente e monitoramento perimetral integrado 24/7.",                                              color:"#ff00aa", tag:"CFTV",      highlight:false },
+  { icon:Cpu,          title:"Segurança IoT/OT",           desc:"Proteção de dispositivos IoT, redes industriais OT/IT, ICS/SCADA e ambientes críticos de manufatura contra ameaças avançadas.",                                color:"#00ffff", tag:"IOT",       highlight:false },
+  { icon:BarChart3,    title:"Inteligência Técnica",       desc:"Threat hunting, CTI, monitoramento da dark web e suporte estratégico para CISOs e C-level.",                                                                   color:"#ffcc00", tag:"INTEL",     highlight:false },
+  { icon:Code2,        title:"Desenvolvimento de Websites", desc:"Sites institucionais, landing pages e sistemas web modernos com foco em performance, SEO e conversão. Stack premium: Next.js, React, TypeScript.",             color:"#00ff88", tag:"WEB DEV",   highlight:true },
+  { icon:Server,       title:"Hospedagem & Desempenho",    desc:"Infraestrutura cloud de alta disponibilidade, CDN global, SSL gratuito e monitoramento 24/7. Seu site rápido, seguro e sempre no ar em qualquer país.",       color:"#4499ff", tag:"HOSTING",   highlight:true },
 ];
 
 function useVis() {
@@ -59,7 +59,7 @@ export default function ServicesSection({fiberRef}:Props){
       <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(ellipse 70% 50% at 100% 0%,rgba(123,47,255,0.05),transparent)"}} />
       <div ref={ref} className="relative max-w-6xl mx-auto px-4 lg:px-8">
         <div className="mb-14" style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(24px)",transition:"all 0.6s"}}>
-          <div className="section-tag">â—ˆ {t.services.tag}</div>
+          <div className="section-tag">◈ {t.services.tag}</div>
           <h2 style={{fontFamily:"var(--font-orbitron)",fontWeight:700,fontSize:"clamp(1.6rem,4vw,2.5rem)",color:"#fff"}}>
             {t.services.title} <span className="gradient-text">{t.services.titleHighlight}</span>
           </h2>
@@ -67,10 +67,10 @@ export default function ServicesSection({fiberRef}:Props){
           <p style={{fontSize:"0.88rem",color:"rgba(255,255,255,0.5)",maxWidth:560,lineHeight:1.7}}>{t.services.desc}</p>
         </div>
 
-        {/* SeguranÃ§a â€” 8 cards */}
+        {/* Segurança — 8 cards */}
         <div className="mb-4" style={{opacity:vis?1:0,transition:"opacity 0.5s 0.1s"}}>
           <div style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:"rgba(0,245,255,0.5)",letterSpacing:"0.2em",marginBottom:12}}>
-            â—ˆ CIBERSEGURANÃ‡A & INFRAESTRUTURA
+            ◈ CIBERSEGURANÇA & INFRAESTRUTURA
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICES.slice(0,8).map((s,i)=><Card key={s.title} s={s} index={i}/>)}
@@ -83,7 +83,7 @@ export default function ServicesSection({fiberRef}:Props){
         {/* Web Dev + Hosting */}
         <div style={{opacity:vis?1:0,transition:"opacity 0.5s 0.3s"}}>
           <div style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:"rgba(0,255,136,0.5)",letterSpacing:"0.2em",marginBottom:12}}>
-            â—ˆ DESENVOLVIMENTO WEB & HOSPEDAGEM
+            ◈ DESENVOLVIMENTO WEB & HOSPEDAGEM
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {SERVICES.slice(8).map((s,i)=><Card key={s.title} s={s} index={i}/>)}
@@ -92,7 +92,7 @@ export default function ServicesSection({fiberRef}:Props){
 
         <div className="mt-12 flex justify-center" style={{opacity:vis?1:0,transition:"opacity 0.6s 0.5s"}}>
           <button className="btn-cyber" onClick={()=>navigate("#contact")}>
-            <Search className="w-4 h-4"/><span>SOLICITAR AVALIAÃ‡ÃƒO GRATUITA â†’</span>
+            <Search className="w-4 h-4"/><span>SOLICITAR AVALIAÇÃO GRATUITA →</span>
           </button>
         </div>
       </div>

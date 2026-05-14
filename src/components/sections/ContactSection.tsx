@@ -10,27 +10,27 @@ import {
 import { useI18n } from "@/lib/i18n";
 
 const schema = z.object({
-  name:    z.string().min(3,"MÃ­nimo 3 caracteres").max(80),
-  email:   z.string().email("E-mail invÃ¡lido"),
+  name:    z.string().min(3,"Mínimo 3 caracteres").max(80),
+  email:   z.string().email("E-mail inválido"),
   phone:   z.string().optional(),
   company: z.string().max(80).optional(),
-  service: z.string().min(1,"Selecione um serviÃ§o"),
-  message: z.string().min(20,"MÃ­nimo 20 caracteres").max(2000),
+  service: z.string().min(1,"Selecione um serviço"),
+  message: z.string().min(20,"Mínimo 20 caracteres").max(2000),
   _hp:     z.string().max(0).optional(),
 });
 type FormData = z.infer<typeof schema>;
 
 const SVCS = [
   "Pentest Autorizado","Auditoria Digital","Antifraude Digital",
-  "Rastreabilidade & OSINT","Conectividade Segura","CFTV & SeguranÃ§a FÃ­sica",
-  "SeguranÃ§a IoT/OT","InteligÃªncia TÃ©cnica",
+  "Rastreabilidade & OSINT","Conectividade Segura","CFTV & Segurança Física",
+  "Segurança IoT/OT","Inteligência Técnica",
   "Desenvolvimento de Website","Hospedagem & Desempenho",
   "Consultoria / Outros",
 ];
 
 const WA_BR = "5512981279877";
 const WA_US = "16893225055";
-const WA_MSG = encodeURIComponent("OlÃ¡! Vim pelo site da Telinfo e gostaria de uma avaliaÃ§Ã£o gratuita.");
+const WA_MSG = encodeURIComponent("Olá! Vim pelo site da Telinfo e gostaria de uma avaliação gratuita.");
 
 function useVis(){
   const ref=useRef<HTMLDivElement>(null);const[vis,setVis]=useState(false);
@@ -38,12 +38,12 @@ function useVis(){
   return{ref,vis};
 }
 
-// â”€â”€â”€ PaÃ­ses atendidos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Países atendidos ─────────────────────────────────────
 const COUNTRIES = [
-  { flag:"ðŸ‡§ðŸ‡·", name:"Brasil" },
-  { flag:"ðŸ‡ºðŸ‡¸", name:"Estados Unidos" },
-  { flag:"ðŸ‡¨ðŸ‡¦", name:"CanadÃ¡" },
-  { flag:"ðŸ‡¬ðŸ‡§", name:"Reino Unido" },
+  { flag:"🇧🇷", name:"Brasil" },
+  { flag:"🇺🇸", name:"Estados Unidos" },
+  { flag:"🇨🇦", name:"Canadá" },
+  { flag:"🇬🇧", name:"Reino Unido" },
 ];
 
 export default function ContactSection(){
@@ -75,14 +75,14 @@ export default function ContactSection(){
       <div ref={ref} className="relative max-w-6xl mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="mb-14" style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(24px)",transition:"all 0.6s"}}>
-          <div className="section-tag">â—ˆ {t.contact.tag}</div>
+          <div className="section-tag">◈ {t.contact.tag}</div>
           <h2 style={{fontFamily:"var(--font-orbitron)",fontWeight:700,fontSize:"clamp(1.6rem,4vw,2.5rem)",color:"#fff"}}>
             {t.contact.title} {t.contact.titleHighlight&&<span className="gradient-text">{t.contact.titleHighlight}</span>}
           </h2>
           <div className="neon-divider"/>
           <p style={{fontSize:"0.88rem",color:"rgba(255,255,255,0.5)",maxWidth:500,lineHeight:1.7}}>{t.contact.desc}</p>
 
-          {/* PaÃ­ses atendidos */}
+          {/* Países atendidos */}
           <div className="flex flex-wrap items-center gap-3 mt-5">
             <span style={{fontFamily:"var(--font-mono)",fontSize:"0.6rem",color:"rgba(255,255,255,0.3)",letterSpacing:"0.15em"}}>
               ATENDEMOS:
@@ -99,7 +99,7 @@ export default function ContactSection(){
 
         <div className="grid lg:grid-cols-[1fr_1.7fr] gap-10 items-start">
 
-          {/* â”€â”€ Coluna de informaÃ§Ãµes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ── Coluna de informações ──────────────────── */}
           <div className="space-y-3"
             style={{opacity:vis?1:0,transform:vis?"translateX(0)":"translateX(-24px)",transition:"all 0.7s 0.1s"}}>
 
@@ -115,7 +115,7 @@ export default function ContactSection(){
                 <a href="mailto:contato@telinfo.com.br" className="text-white" style={{fontSize:"0.85rem",fontWeight:500,textDecoration:"none"}}>
                   contato@telinfo.com.br
                 </a>
-                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>Resposta em atÃ© 2 horas Ãºteis</div>
+                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>Resposta em até 2 horas úteis</div>
               </div>
             </div>
 
@@ -131,10 +131,10 @@ export default function ContactSection(){
               </div>
               <div>
                 <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.28)",letterSpacing:"0.12em",marginBottom:2}}>
-                  TELEFONE BRASIL ðŸ‡§ðŸ‡·
+                  TELEFONE BRASIL 🇧🇷
                 </div>
                 <div className="text-white" style={{fontSize:"0.88rem",fontWeight:600}}>+55 12 98127-9877</div>
-                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>WhatsApp & LigaÃ§Ãµes</div>
+                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>WhatsApp & Ligações</div>
               </div>
             </a>
 
@@ -150,7 +150,7 @@ export default function ContactSection(){
               </div>
               <div>
                 <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.28)",letterSpacing:"0.12em",marginBottom:2}}>
-                  USA / CANADA / UK ðŸ‡ºðŸ‡¸ ðŸ‡¨ðŸ‡¦ ðŸ‡¬ðŸ‡§
+                  USA / CANADA / UK 🇺🇸 🇨🇦 🇬🇧
                 </div>
                 <div className="text-white" style={{fontSize:"0.88rem",fontWeight:600}}>+1 689 322 5055</div>
                 <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>WhatsApp & Calls</div>
@@ -175,7 +175,7 @@ export default function ContactSection(){
               </div>
             </a>
 
-            {/* LocalizaÃ§Ã£o */}
+            {/* Localização */}
             <div className="flex items-start gap-4 p-4 rounded"
               style={{background:"rgba(255,255,255,0.015)",border:"1px solid rgba(255,255,255,0.05)"}}>
               <div className="w-9 h-9 rounded flex items-center justify-center flex-shrink-0"
@@ -183,8 +183,8 @@ export default function ContactSection(){
                 <MapPin className="w-4 h-4" style={{color:"#7b2fff"}}/>
               </div>
               <div>
-                <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.28)",letterSpacing:"0.12em",marginBottom:2}}>LOCALIZAÃ‡ÃƒO</div>
-                <div className="text-white" style={{fontSize:"0.85rem",fontWeight:500}}>SÃ£o JosÃ© dos Campos, SP â€” Brasil</div>
+                <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.28)",letterSpacing:"0.12em",marginBottom:2}}>LOCALIZAÇÃO</div>
+                <div className="text-white" style={{fontSize:"0.85rem",fontWeight:500}}>São José dos Campos, SP — Brasil</div>
                 <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.35)"}}>Atendimento global: BR, EUA, CA, UK</div>
               </div>
             </div>
@@ -198,7 +198,7 @@ export default function ContactSection(){
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.background="rgba(0,255,136,0.09)";(e.currentTarget as HTMLElement).style.boxShadow="0 0 18px rgba(0,255,136,0.14)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.background="rgba(0,255,136,0.04)";(e.currentTarget as HTMLElement).style.boxShadow="";}}>
               <MessageSquare className="w-4 h-4"/>
-              ðŸ‡§ðŸ‡· WHATSAPP BRASIL â€” +55 12 98127-9877
+              🇧🇷 WHATSAPP BRASIL — +55 12 98127-9877
             </a>
 
             {/* WhatsApp EUA */}
@@ -210,11 +210,11 @@ export default function ContactSection(){
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.background="rgba(68,153,255,0.09)";(e.currentTarget as HTMLElement).style.boxShadow="0 0 18px rgba(68,153,255,0.14)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.background="rgba(68,153,255,0.04)";(e.currentTarget as HTMLElement).style.boxShadow="";}}>
               <MessageSquare className="w-4 h-4"/>
-              ðŸ‡ºðŸ‡¸ WHATSAPP USA/CA/UK â€” +1 689 322 5055
+              🇺🇸 WHATSAPP USA/CA/UK — +1 689 322 5055
             </a>
           </div>
 
-          {/* â”€â”€ FormulÃ¡rio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+          {/* ── Formulário ────────────────────────────── */}
           <div className="neon-card overflow-hidden"
             style={{opacity:vis?1:0,transform:vis?"translateX(0)":"translateX(24px)",transition:"all 0.7s 0.15s"}}>
             <div className="absolute top-0 left-0 right-0 h-px"
@@ -224,7 +224,7 @@ export default function ContactSection(){
               <div className="flex items-center gap-2.5 mb-6 pb-4" style={{borderBottom:"1px solid rgba(255,255,255,0.05)"}}>
                 <div className="w-2 h-2 rounded-full bg-green-400" style={{animation:"pulse-neon 2s infinite"}}/>
                 <span style={{fontFamily:"var(--font-mono)",fontSize:"0.6rem",color:"rgba(255,255,255,0.3)",letterSpacing:"0.12em"}}>
-                  SECURE_FORM v2.1 â€” ENCRYPTED
+                  SECURE_FORM v2.1 — ENCRYPTED
                 </span>
               </div>
 
@@ -242,7 +242,7 @@ export default function ContactSection(){
                   </div>
                   <button onClick={()=>setStatus("idle")}
                     style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:"#00f5ff",marginTop:8}}>
-                    â† Enviar outra mensagem
+                    ← Enviar outra mensagem
                   </button>
                 </div>
               ):(
@@ -281,7 +281,7 @@ export default function ContactSection(){
                     <label style={labelStyle}>{t.contact.service}</label>
                     <select {...register("service")} defaultValue="" className="field"
                       style={errors.service?{borderColor:"rgba(255,60,60,0.45)"}:{}}>
-                      <option value="" disabled>Selecione o serviÃ§o...</option>
+                      <option value="" disabled>Selecione o serviço...</option>
                       {SVCS.map(o=><option key={o} value={o}>{o}</option>)}
                     </select>
                     {errors.service&&<p className="flex items-center gap-1 mt-1" style={{fontFamily:"var(--font-mono)",fontSize:"0.58rem",color:"rgba(255,100,100,0.8)"}}>

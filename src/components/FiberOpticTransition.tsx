@@ -1,19 +1,19 @@
 "use client";
 
 /**
- * FiberOpticTransition.tsx â€” "SOURCE CODE TRAVEL" EDITION
+ * FiberOpticTransition.tsx — "SOURCE CODE TRAVEL" EDITION
  * =========================================================
- * Efeito de transiÃ§Ã£o: viajando dentro do cÃ³digo-fonte em alta
- * velocidade. TrÃªs camadas simultÃ¢neas no canvas 2D:
+ * Efeito de transição: viajando dentro do código-fonte em alta
+ * velocidade. Três camadas simultâneas no canvas 2D:
  *
- *  1. CHUVA MATRIX   â€” colunas de caracteres de cÃ³digo (fundo)
- *  2. WARP DE TOKENS â€” palavras-chave e snippets em perspectiva 3D
- *                      (estrelas â†’ tokens de cÃ³digo em hyperdrive)
- *  3. LINHAS PARALLAX â€” linhas de cÃ³digo deslizando em profundidades
+ *  1. CHUVA MATRIX   — colunas de caracteres de código (fundo)
+ *  2. WARP DE TOKENS — palavras-chave e snippets em perspectiva 3D
+ *                      (estrelas → tokens de código em hyperdrive)
+ *  3. LINHAS PARALLAX — linhas de código deslizando em profundidades
  *                       diferentes (efeito de velocidade lateral)
  *
- * Zero dependÃªncias externas. Canvas 2D puro.
- * API idÃªntica Ã  versÃ£o anterior (FiberHandle + useFiberNav).
+ * Zero dependências externas. Canvas 2D puro.
+ * API idêntica à versão anterior (FiberHandle + useFiberNav).
  */
 
 import {
@@ -25,7 +25,7 @@ export interface FiberHandle {
   trigger: (onComplete?: () => void) => void;
 }
 
-// â”€â”€â”€ Token pools â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Token pools ─────────────────────────────────────────────────────
 
 const KW = ["const","let","var","function","return","if","else","for",
   "while","class","import","export","default","async","await","try",
@@ -61,7 +61,7 @@ const SNIPS = [
   "// TODO: implement rate limiting here",
   "const router = useRouter(); router.push('/dashboard')",
   "z.object({ email: z.string().email() }).parse(body)",
-  "tailwind.config.ts â†’ theme.extend.colors",
+  "tailwind.config.ts → theme.extend.colors",
   "npm run build && vercel deploy --prod",
   "git commit -m 'fix: resolve ReactCurrentOwner error'",
   "prisma.lead.create({ data: { name, email, message } })",
@@ -71,15 +71,15 @@ const SNIPS = [
   "const { x, y } = projectStar(star, cx, cy)",
   "Math.hypot(dx, dy) < THRESHOLD",
   "clsx(styles.card, hover && styles.active)",
-  "next.config.ts â†’ headers() â†’ Content-Security-Policy",
+  "next.config.ts → headers() → Content-Security-Policy",
   "schema.parse(requestBody) // Zod validation",
   "@react-three/fiber // removed - canvas 2D only",
 ];
 
 const MATRIX_POOL =
-  "01ã‚¢ã‚¤ã‚¦ã‚¨ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³{}();=>&&||const let var if".split("");
+  "01アイウエオカキクケコ{}();=>&&||const let var if".split("");
 
-// â”€â”€â”€ Token color by type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Token color by type ──────────────────────────────────────────────
 type TType = "kw"|"react"|"op"|"sym"|"snip"|"comment";
 const TC: Record<TType,string> = {
   kw:      "#00f5ff",
@@ -105,9 +105,9 @@ function rndTok(): Tok {
   return { content, color: TC[type], fs };
 }
 
-// â”€â”€â”€ Star warp token â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Star warp token ─────────────────────────────────────────────────
 interface StarTok {
-  nx: number;  // -0.5 â†’ 0.5
+  nx: number;  // -0.5 → 0.5
   ny: number;
   z:  number;  // 1=far 0.01=near
   tok: Tok;
@@ -128,7 +128,7 @@ function project(s: StarTok, cx: number, cy: number) {
   };
 }
 
-// â”€â”€â”€ Matrix rain column â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Matrix rain column ──────────────────────────────────────────────
 interface Rain { x: number; y: number; spd: number; chars: string[]; len: number }
 
 function mkRain(W: number): Rain[] {
@@ -142,7 +142,7 @@ function mkRain(W: number): Rain[] {
   }));
 }
 
-// â”€â”€â”€ Horizontal parallax code line â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Horizontal parallax code line ───────────────────────────────────
 interface HLine { y: number; x: number; spd: number; depth: number; tok: Tok }
 
 function mkLines(H: number): HLine[] {
@@ -154,7 +154,7 @@ function mkLines(H: number): HLine[] {
   });
 }
 
-// â”€â”€â”€ Core draw â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Core draw ───────────────────────────────────────────────────────
 function draw(
   ctx: CanvasRenderingContext2D,
   W: number, H: number,
@@ -165,14 +165,14 @@ function draw(
   const spd = Math.sin(t*Math.PI)*4.2+0.9;
   const fade= t<.09 ? t/.09 : t>.91 ? (1-t)/.09 : 1;
 
-  // Semi-transparent clear â†’ motion blur on trails
+  // Semi-transparent clear → motion blur on trails
   ctx.globalCompositeOperation = "source-over";
   ctx.fillStyle = `rgba(2,4,8,${.26+t*.1})`;
   ctx.fillRect(0,0,W,H);
   ctx.save();
   ctx.globalAlpha = fade;
 
-  // â”€â”€ LAYER 1: Matrix rain (background) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── LAYER 1: Matrix rain (background) ─────────────────────────
   const CH=18;
   rain.forEach(col => {
     col.y += col.spd*spd*.52*dt*60;
@@ -192,7 +192,7 @@ function draw(
     }
   });
 
-  // â”€â”€ LAYER 2: Code token warp (main depth effect) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── LAYER 2: Code token warp (main depth effect) ───────────────
   ctx.globalAlpha=1;
   stars.sort((a,b)=>b.z-a.z);
 
@@ -231,7 +231,7 @@ function draw(
     ctx.restore();
   });
 
-  // â”€â”€ LAYER 3: Horizontal parallax lines â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── LAYER 3: Horizontal parallax lines ────────────────────────
   lines.forEach(ln => {
     ln.x+=ln.spd*spd*dt*.55;
     if (ln.spd>0&&ln.x>1.15) { ln.x=-.15; ln.tok=rndTok(); ln.y=Math.random()*H; }
@@ -247,7 +247,7 @@ function draw(
     ctx.restore();
   });
 
-  // â”€â”€ Central vortex glow (origin point) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Central vortex glow (origin point) ────────────────────────
   if (t>.05&&t<.95) {
     const va=Math.sin(t*Math.PI)*.32*fade;
     const g=ctx.createRadialGradient(cx,cy,0,cx,cy,110);
@@ -261,7 +261,7 @@ function draw(
 
   ctx.restore();
 
-  // â”€â”€ HUD overlay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── HUD overlay ───────────────────────────────────────────────
   if (fade<.1) return;
   const ha=fade*.72;
   ctx.save();
@@ -281,7 +281,7 @@ function draw(
   ctx.fillText("TELINFO://PARSING_SOURCE_CODE", 30, 30);
   ctx.fillText(`DEPTH: ${(t*1000000|0).toLocaleString()} lines`, 30, 44);
   ctx.textAlign="right"; ctx.fillStyle="#00f5ff";
-  ctx.fillText("SYNTAX: OK âœ“", W-30, 30);
+  ctx.fillText("SYNTAX: OK ✓", W-30, 30);
   ctx.fillText(`SPEED: ${Math.round(spd*100)}%`, W-30, 44);
   ctx.textAlign="left";
   const BW=190,BH=2,BX=(W-BW)/2,BY=H-46;
@@ -298,7 +298,7 @@ function draw(
   ctx.restore();
 }
 
-// â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Component ───────────────────────────────────────────────────────
 const FiberOpticTransition = forwardRef<FiberHandle,object>(
   function FiberOpticTransition(_,ref) {
     const [active,setActive]=useState(false);
