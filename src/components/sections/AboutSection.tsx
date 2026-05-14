@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useRef, useEffect, useState } from "react";
 import { Linkedin, Award, Cpu } from "lucide-react";
 import { useI18n } from "@/lib/i18n";

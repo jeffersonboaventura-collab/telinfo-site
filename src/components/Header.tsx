@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useRef, useState, useEffect, RefObject } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useI18n, Locale } from "@/lib/i18n";

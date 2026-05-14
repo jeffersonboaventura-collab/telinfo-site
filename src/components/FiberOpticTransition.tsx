@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /**
  * FiberOpticTransition.tsx â€” "SOURCE CODE TRAVEL" EDITION

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useRef, useEffect, useState, RefObject } from "react";
 import { Search, Eye, AlertTriangle, Crosshair, Network, Camera, Cpu, BarChart3, Code2, Server } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
