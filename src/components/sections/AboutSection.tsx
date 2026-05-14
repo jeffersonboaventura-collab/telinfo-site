@@ -1,113 +1,182 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
-import { Linkedin, Award, Cpu } from "lucide-react";
+
+import React from "react";
+import { Mail, Linkedin, MapPin, Calendar, Award } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
-const TIMELINE = [
-  { year:"2012", title:"Fundação da Telinfo",          desc:"Jefferson Boaventura funda a Telinfo em São José dos Campos/SP como provedora de internet para empresas e residências no Vale do Paraíba.", color:"#00f5ff" },
-  { year:"2015", title:"Expansão Regional",            desc:"Crescimento da rede de conectividade para múltiplas cidades do Vale do Paraíba, consolidando parceiros corporativos estratégicos.",          color:"#4499ff" },
-  { year:"2016", title:"ValeMovel — 1ª MVNO da Região 🏆", desc:"Criação da ValeMovel Tecnologia, a primeira MVNO do Vale do Paraíba. Marco histórico em inovação regulatória e técnica.", color:"#7b2fff", highlight:true },
-  { year:"2019", title:"Pivô para Cibersegurança",     desc:"Identificando a crescente demanda por segurança digital, Jefferson lidera a transição para serviços especializados em cibersegurança.",  color:"#ffcc00" },
-  { year:"2022", title:"Portfólio Especializado",      desc:"Consolidação em Pentest, Antifraude, Rastreabilidade e Inteligência Técnica com metodologias internacionais (OWASP, NIST, ISO 27001).",   color:"#00ff88" },
-  { year:"2024", title:"Liderança Nacional ◉",         desc:"Referência nacional em cibersegurança com equipe multidisciplinar, atuando em CFTV, IoT, OT/IT e segurança empresarial de todos os portes.", color:"#ff00aa", active:true },
-];
-const TAGS = [{label:"Pentest",color:"#00f5ff"},{label:"Telecomunicações",color:"#4499ff"},{label:"Mecatrônica",color:"#7b2fff"},{label:"Antifraude",color:"#00ff88"},{label:"MVNO",color:"#ff9900"},{label:"Redes OT/IT",color:"#ff00aa"},{label:"LGPD",color:"#ffcc00"},{label:"IoT Security",color:"#00ffff"}];
+type TimelineItem = {
+  year?: string;
+  title?: string;
+  text?: string;
+  badge?: string;
+};
 
-function useVis(threshold=0.15) {
-  const ref=useRef<HTMLDivElement>(null); const [vis,setVis]=useState(false);
-  useEffect(()=>{const el=ref.current;if(!el)return;const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){setVis(true);obs.disconnect();}},{threshold});obs.observe(el);return()=>obs.disconnect();},[threshold]);
-  return {ref,vis};
+function safeText(value: unknown): string {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "number") return String(value);
+  return "";
 }
 
-function TLItem({item,index}:{item:typeof TIMELINE[0];index:number}) {
-  const {ref,vis}=useVis();
-  return (
-    <div ref={ref} className="relative pl-9 pb-6 last:pb-0" style={{opacity:vis?1:0,transform:vis?"translateX(0)":"translateX(20px)",transition:`opacity 0.5s ${index*.08}s,transform 0.5s ${index*.08}s`}}>
-      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 flex items-center justify-center z-10"
-        style={{borderColor:item.color,background:item.active?item.color:"#020408",boxShadow:(item.highlight||item.active)?`0 0 12px ${item.color}60`:"none"}}>
-        {item.active&&<div className="w-1.5 h-1.5 rounded-full" style={{background:"#020408",animation:"pulse-neon 1.5s infinite"}} />}
-      </div>
-      <span style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:item.color,letterSpacing:"0.1em",marginBottom:4,display:"block"}}>{item.year}</span>
-      <div className="font-bold text-white mb-1.5" style={{fontFamily:"var(--font-orbitron)",fontSize:"0.8rem",color:item.highlight?item.color:"#fff"}}>{item.title}</div>
-      <p style={{fontSize:"0.77rem",color:"rgba(255,255,255,0.5)",lineHeight:1.65}}>{item.desc}</p>
-      {item.highlight&&<div className="inline-flex items-center gap-1.5 mt-2 px-2.5 py-1 rounded" style={{fontFamily:"var(--font-mono)",fontSize:"0.58rem",color:item.color,background:`${item.color}10`,border:`1px solid ${item.color}28`}}><Award className="w-3 h-3" />INOVAÇÃO HISTÓRICA REGIONAL</div>}
-    </div>
-  );
-}
+export function AboutSection() {
+  const { t } = useI18n();
+  const about = t?.about ?? {};
 
-export default function AboutSection() {
-  const {t}=useI18n(); const {ref,vis}=useVis(0.1);
+  const tags: string[] = Array.isArray(about.tags) ? about.tags : [];
+  const timeline: TimelineItem[] = Array.isArray(about.timeline)
+    ? about.timeline.map((item: unknown) => {
+        if (typeof item === "object" && item !== null) return item as TimelineItem;
+        return { text: safeText(item) };
+      })
+    : [];
+
   return (
-    <section id="about" className="relative py-24 md:py-32 bg-[#020408] overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(ellipse 60% 40% at 0% 50%,rgba(0,245,255,0.04),transparent)"}} />
-      <div ref={ref} className="relative max-w-6xl mx-auto px-4 lg:px-8">
-        <div className="mb-14" style={{opacity:vis?1:0,transform:vis?"translateY(0)":"translateY(24px)",transition:"all 0.6s"}}>
-          <div className="section-tag">◈ {t.about.tag}</div>
-          <h2 style={{fontFamily:"var(--font-orbitron)",fontWeight:700,fontSize:"clamp(1.6rem,4vw,2.5rem)",color:"#fff"}}>
-            {t.about.title} <span className="gradient-text">{t.about.titleHighlight}</span> {t.about.titleEnd}
+    <section id="about" className="relative py-24 px-6 overflow-hidden">
+      <span id="sobre" className="absolute -top-24" />
+
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-14">
+          <p className="text-cyan-400 uppercase tracking-[0.35em] text-xs mb-4">
+            {safeText(about.eyebrow) || "Linha do tempo"}
+          </p>
+
+          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
+            {safeText(about.title) || "Trajetória de Inovação e Segurança"}
           </h2>
-          <div className="neon-divider" />
+
+          <div className="mt-6 h-px w-32 bg-cyan-400" />
         </div>
-        <div className="grid lg:grid-cols-[1fr_1.25fr] gap-12 lg:gap-16 items-start">
-          {/* Founder */}
-          <div style={{opacity:vis?1:0,transform:vis?"translateX(0)":"translateX(-30px)",transition:"all 0.7s 0.1s"}}>
-            <div className="neon-card p-6 mb-4">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-16 h-16 rounded border border-cyan-500/30 flex items-center justify-center flex-shrink-0"
-                  style={{fontFamily:"var(--font-orbitron)",fontSize:"1.6rem",fontWeight:700,color:"#00f5ff",background:"linear-gradient(135deg,rgba(0,245,255,0.08),rgba(123,47,255,0.08))"}}>JB</div>
+
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
+          <div className="space-y-6">
+            <div className="rounded-2xl border border-cyan-400/20 bg-slate-950/70 p-7 shadow-2xl shadow-cyan-500/10">
+              <div className="flex items-center gap-5 mb-7">
+                <div className="h-20 w-20 rounded-xl border border-cyan-400/60 bg-slate-900 flex items-center justify-center text-3xl font-black text-cyan-400">
+                  JB
+                </div>
+
                 <div>
-                  <div style={{fontFamily:"var(--font-orbitron)",fontSize:"0.9rem",fontWeight:700,color:"#fff",marginBottom:3}}>Jefferson Boaventura da Silva</div>
-                  <div style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:"#00f5ff",letterSpacing:"0.15em",marginBottom:8}}>{t.about.role}</div>
-                  <a href="https://www.linkedin.com/in/jefferson-boaventura-aa13a11b9" target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5" style={{fontFamily:"var(--font-mono)",fontSize:"0.6rem",color:"#4499ff"}}>
-                    <Linkedin className="w-3 h-3" />linkedin.com/in/jefferson-boaventura-aa13a11b9
+                  <h3 className="text-2xl font-bold text-white">
+                    {safeText(about.name) || "Jefferson Boaventura da Silva"}
+                  </h3>
+
+                  <p className="text-cyan-400 text-sm uppercase tracking-widest mt-1">
+                    {safeText(about.role) || "Fundador & Diretor Técnico"}
+                  </p>
+
+                  <a
+                    href="https://www.linkedin.com/in/jefferson-boaventura-aa13a11b9/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-xs text-blue-300 mt-3 hover:text-cyan-300"
+                  >
+                    <Linkedin size={14} />
+                    linkedin.com/in/jefferson-boaventura-aa13a11b9
                   </a>
                 </div>
               </div>
-              <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.6)",lineHeight:1.72,marginBottom:12}}>{t.about.bio1}</p>
-              <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.6)",lineHeight:1.72,marginBottom:16}}>{t.about.bio2}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {TAGS.map((tag)=>(
-                  <span key={tag.label} style={{fontFamily:"var(--font-mono)",fontSize:"0.58rem",padding:"3px 8px",borderRadius:3,color:tag.color,background:`${tag.color}10`,border:`1px solid ${tag.color}25`}}>{tag.label}</span>
+
+              <p className="text-slate-300 leading-relaxed mb-5">
+                {safeText(about.bio1)}
+              </p>
+
+              <p className="text-slate-300 leading-relaxed">
+                {safeText(about.bio2)}
+              </p>
+
+              <div className="flex flex-wrap gap-2 mt-7">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-md border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="neon-card p-4 text-center">
-                <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.3)",marginBottom:4,letterSpacing:"0.1em"}}>FUNDAÇÃO</div>
-                <div style={{fontFamily:"var(--font-orbitron)",fontSize:"1.3rem",fontWeight:700,color:"#00f5ff"}}>2012</div>
-                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.4)"}}>São José dos Campos, SP</div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="rounded-xl border border-cyan-400/20 bg-slate-950/60 p-5">
+                <Calendar className="text-cyan-400 mb-3" size={22} />
+                <p className="text-xs uppercase tracking-widest text-slate-500">
+                  {safeText(about.founded) || "Fundação"}
+                </p>
+                <p className="text-3xl font-black text-cyan-300">
+                  {safeText(about.foundedValue) || "2012"}
+                </p>
+                <p className="text-sm text-slate-400 mt-1">
+                  {safeText(about.location) || "São José dos Campos, SP"}
+                </p>
               </div>
-              <div className="neon-card p-4 text-center" style={{borderColor:"rgba(123,47,255,0.2)",background:"rgba(123,47,255,0.05)"}}>
-                <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.3)",marginBottom:4,letterSpacing:"0.1em"}}>DESTAQUE</div>
-                <div style={{fontFamily:"var(--font-orbitron)",fontSize:"1rem",fontWeight:700,color:"#7b2fff"}}>1ª MVNO</div>
-                <div style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.4)"}}>Vale do Paraíba</div>
+
+              <div className="rounded-xl border border-purple-400/20 bg-slate-950/60 p-5">
+                <Award className="text-purple-400 mb-3" size={22} />
+                <p className="text-xs uppercase tracking-widest text-slate-500">
+                  {safeText(about.highlight) || "Destaque"}
+                </p>
+                <p className="text-3xl font-black text-purple-300">
+                  {safeText(about.highlightValue) || "1ª MVNO"}
+                </p>
+                <p className="text-sm text-slate-400 mt-1">
+                  {safeText(about.highlightLabel) || "Vale do Paraíba"}
+                </p>
               </div>
             </div>
-            <div className="neon-card mt-3 p-3 flex items-center gap-3">
-              <div className="w-8 h-8 rounded flex items-center justify-center flex-shrink-0" style={{background:"rgba(0,245,255,0.08)",border:"1px solid rgba(0,245,255,0.18)"}}>
-                <Cpu className="w-4 h-4 text-cyan-400" />
-              </div>
-              <div>
-                <div style={{fontFamily:"var(--font-mono)",fontSize:"0.57rem",color:"rgba(255,255,255,0.3)",letterSpacing:"0.1em"}}>E-MAIL</div>
-                <div className="text-white" style={{fontSize:"0.85rem"}}>contato@telinfo.com.br</div>
+
+            <div className="rounded-xl border border-cyan-400/20 bg-slate-950/60 p-5">
+              <div className="flex items-center gap-3">
+                <Mail className="text-cyan-400" size={20} />
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-slate-500">
+                    E-mail
+                  </p>
+                  <a
+                    href="mailto:contato@telinfo.com.br"
+                    className="text-white font-semibold hover:text-cyan-300"
+                  >
+                    contato@telinfo.com.br
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          {/* Timeline */}
-          <div style={{opacity:vis?1:0,transform:vis?"translateX(0)":"translateX(30px)",transition:"all 0.7s 0.15s"}}>
-            <div style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",color:"rgba(255,255,255,0.3)",letterSpacing:"0.2em",marginBottom:20}}>◈ {t.about.timeline}</div>
-            <div className="relative pl-0">
-              <div className="absolute left-1.5 top-2 bottom-2 w-px" style={{background:"linear-gradient(180deg,#00f5ff,#7b2fff,rgba(255,0,170,0.3),transparent)"}} />
-              {TIMELINE.map((item,i)=><TLItem key={item.year} item={item} index={i} />)}
+
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500" />
+
+            <div className="space-y-10">
+              {timeline.map((item, index) => (
+                <div key={`${safeText(item.year)}-${index}`} className="relative pl-14">
+                  <div className="absolute left-0 top-1 h-8 w-8 rounded-full border-2 border-cyan-400 bg-black shadow-lg shadow-cyan-400/40" />
+
+                  <p className="text-cyan-400 text-xs font-bold tracking-widest mb-2">
+                    {safeText(item.year)}
+                  </p>
+
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {safeText(item.title)}
+                  </h3>
+
+                  <p className="text-slate-400 leading-relaxed">
+                    {safeText(item.text)}
+                  </p>
+
+                  {item.badge ? (
+                    <span className="inline-block mt-4 rounded-md border border-purple-400/30 bg-purple-500/10 px-3 py-1 text-xs uppercase tracking-widest text-purple-300">
+                      {safeText(item.badge)}
+                    </span>
+                  ) : null}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,255,255,0.08),transparent_30%),radial-gradient(circle_at_80%_60%,rgba(168,85,247,0.08),transparent_35%)]" />
     </section>
   );
 }
 
-
-
-
+export default AboutSection;
